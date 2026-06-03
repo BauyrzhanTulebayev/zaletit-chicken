@@ -1,15 +1,71 @@
+const media = {
+  wings: "/assets/clean-wings.png",
+  tenders: "/assets/tenders.webp",
+  sandwich: "/assets/clean-sandwich.png",
+  bbqSandwich: "/assets/clean-bbq-sandwich.png",
+  fries: "/assets/clean-fries.png",
+  mozzarella: "/assets/clean-mozzarella.png",
+  onionRings: "/assets/clean-onion-rings.png",
+  atomic: "/assets/clean-atomic-sauce.png",
+  mango: "/assets/clean-mango-habanero.png",
+  garlic: "/assets/clean-garlic-parmesan.png",
+  honey: "/assets/clean-honey-bbq.png",
+  nuclear: "/assets/clean-nuclear.png",
+  ranch: "/assets/clean-ranch.png",
+  blueCheese: "/assets/clean-blue-cheese.png",
+};
+
+const heroScenes = {
+  "for-you": {
+    video: "/assets/hero-for-you.mp4",
+    poster: media.wings,
+    title: "Крылья, которые залетают",
+    subtitle: "Хруст, соус и жар прямо в твоём боксе",
+  },
+  wings: {
+    video: "/assets/hero-wings.mp4",
+    poster: media.wings,
+    title: "Выбирай остроту",
+    subtitle: "Classic, boneless или tenders с соусом на максимум",
+  },
+  combo: {
+    video: "/assets/hero-combo.mp4",
+    poster: media.tenders,
+    title: "Бокс на компанию",
+    subtitle: "Крылья, фри, дипы и напиток без лишних решений",
+  },
+  burgers: {
+    video: "/assets/hero-burgers.mp4",
+    poster: media.sandwich,
+    title: "Сэндвич с характером",
+    subtitle: "Сочная курица, соус и мягкая булка в один укус",
+  },
+  sides: {
+    video: "/assets/hero-sides.mp4",
+    poster: media.fries,
+    title: "Добавь хруст",
+    subtitle: "Waffle fries, сырные палочки и кольца к любым крыльям",
+  },
+  sauces: {
+    video: "/assets/hero-sauces.mp4",
+    poster: media.mango,
+    title: "Соус решает",
+    subtitle: "От Honey BBQ до Nuclear: собери свой вкус",
+  },
+};
+
 const sauces = [
-  "Mild Buffalo",
-  "Hot Buffalo",
+  "Mild",
+  "Medium",
+  "Hot",
   "Atomic",
+  "Nuclear",
   "Mango Habanero",
   "Garlic Parmesan",
   "Honey BBQ",
   "Thai Chili",
-  "Сырный чеснок",
-  "Аджика BBQ",
-  "Корея spicy",
-  "Ранч",
+  "Lemon Pepper",
+  "Ranch",
   "Blue Cheese",
 ];
 
@@ -20,38 +76,41 @@ const categories = [
     items: [
       {
         id: "classic-wings",
-        name: "Классические крылья",
-        desc: "Хрустящие крылья на кости, соус на выбор и дип.",
+        name: "Classic Wings",
+        desc: "Крылья на кости, приготовленные под заказ. Выбери количество и фирменный соус.",
         price: 2390,
-        spice: "острота 2",
+        spice: "classic",
+        image: media.wings,
         sizes: [
-          { label: "6 шт", price: 2390 },
-          { label: "10 шт", price: 3690 },
-          { label: "15 шт", price: 5290 },
+          { label: "5 шт", price: 2390 },
+          { label: "10 шт", price: 4190 },
+          { label: "15 шт", price: 5990 },
         ],
       },
       {
-        id: "boneless",
-        name: "Boneless крылья",
-        desc: "Сочное куриное филе без кости в хрустящей панировке.",
+        id: "boneless-wings",
+        name: "Boneless Wings",
+        desc: "Кусочки куриного филе без кости в хрустящей панировке и соусе на выбор.",
         price: 2490,
-        spice: "острота 1",
+        spice: "без кости",
+        image: media.tenders,
         sizes: [
           { label: "8 шт", price: 2490 },
-          { label: "12 шт", price: 3490 },
-          { label: "18 шт", price: 4890 },
+          { label: "12 шт", price: 3590 },
+          { label: "18 шт", price: 4990 },
         ],
       },
       {
-        id: "tenders",
-        name: "Chicken tenders",
-        desc: "Большие стрипсы из филе, идеально к ранчу и BBQ.",
-        price: 2590,
-        spice: "0",
+        id: "chicken-tenders",
+        name: "Chicken Tenders",
+        desc: "Сочные стрипсы из белого мяса. Хорошо заходят с Ranch, Honey BBQ и Garlic Parmesan.",
+        price: 2690,
+        spice: "tenders",
+        image: media.tenders,
         sizes: [
-          { label: "4 шт", price: 2590 },
-          { label: "6 шт", price: 3490 },
-          { label: "9 шт", price: 4890 },
+          { label: "4 шт", price: 2690 },
+          { label: "6 шт", price: 3690 },
+          { label: "9 шт", price: 5190 },
         ],
       },
     ],
@@ -61,25 +120,28 @@ const categories = [
     title: "Комбо",
     items: [
       {
-        id: "zaletit-box",
-        name: "Zaletit Box",
-        desc: "10 крыльев, фри, 2 дипа и напиток. Самый быстрый выбор.",
-        price: 4990,
+        id: "classic-combo",
+        name: "Classic Wings Combo",
+        desc: "Крылья на кости, waffle fries, дип и напиток. Самый понятный заказ.",
+        price: 3990,
         spice: "хит",
+        image: media.wings,
       },
       {
-        id: "duo-box",
-        name: "Duo Box",
-        desc: "20 крыльев, большая фри, 4 дипа и два напитка.",
-        price: 8990,
-        spice: "на двоих",
-      },
-      {
-        id: "lunch-combo",
-        name: "Lunch Combo",
-        desc: "6 boneless, фри и напиток для быстрого обеда.",
-        price: 3290,
+        id: "boneless-combo",
+        name: "Boneless Combo",
+        desc: "Boneless wings, фри, дип и напиток. Удобно есть на ходу.",
+        price: 3890,
         spice: "15 мин",
+        image: media.tenders,
+      },
+      {
+        id: "party-box",
+        name: "Party Box",
+        desc: "20 крыльев, большая порция waffle fries и 4 дипа для компании.",
+        price: 9990,
+        spice: "на всех",
+        image: media.wings,
       },
     ],
   },
@@ -88,18 +150,28 @@ const categories = [
     title: "Бургеры",
     items: [
       {
-        id: "spicy-burger",
-        name: "Spicy Chicken Burger",
-        desc: "Куриное филе, острый баффало, салат, маринованный огурец.",
-        price: 2790,
-        spice: "острота 3",
+        id: "aw-sandwich",
+        name: "AW Chicken Sandwich",
+        desc: "Хрустящее куриное филе, салат, солёные огурцы и фирменный соус.",
+        price: 2890,
+        spice: "crispy",
+        image: media.sandwich,
       },
       {
-        id: "bbq-burger",
-        name: "BBQ Chicken Burger",
-        desc: "Хрустящая курица, Honey BBQ, сыр, коул-слоу.",
-        price: 2890,
+        id: "buffalo-ranch",
+        name: "Buffalo Ranch Sandwich",
+        desc: "Курица в Buffalo, сливочный Ranch, свежий салат и мягкая булка.",
+        price: 2990,
+        spice: "spicy",
+        image: media.sandwich,
+      },
+      {
+        id: "bbq-sandwich",
+        name: "Honey BBQ Sandwich",
+        desc: "Сладко-дымный Honey BBQ, хрустящая курица и сочная начинка.",
+        price: 3090,
         spice: "sweet",
+        image: media.bbqSandwich,
       },
     ],
   },
@@ -108,53 +180,73 @@ const categories = [
     title: "Гарниры",
     items: [
       {
-        id: "fries",
-        name: "Картофель фри",
-        desc: "Золотистая фри с фирменной солью.",
-        price: 990,
-        spice: "side",
-      },
-      {
         id: "waffle-fries",
-        name: "Вафельная картошка",
-        desc: "Плотная вафельная нарезка, хорошо держит соус.",
+        name: "Famous Waffle Fries",
+        desc: "Рифлёная картошка, которая держит соус лучше обычной фри.",
         price: 1290,
         spice: "side",
+        image: media.fries,
       },
       {
-        id: "mozzarella",
-        name: "Сырные палочки",
-        desc: "Тянущаяся моцарелла в хрустящей корочке.",
-        price: 1690,
+        id: "mozzarella-sticks",
+        name: "Mozzarella Sticks",
+        desc: "Тянущаяся моцарелла в хрустящей корочке. Бери с Ranch.",
+        price: 1790,
         spice: "cheese",
+        image: media.mozzarella,
+      },
+      {
+        id: "onion-rings",
+        name: "Onion Rings",
+        desc: "Золотистые луковые кольца к крыльям и сэндвичам.",
+        price: 1390,
+        spice: "crispy",
+        image: media.onionRings,
       },
     ],
   },
   {
-    id: "drinks",
-    title: "Напитки",
+    id: "sauces",
+    title: "Соусы",
     items: [
       {
-        id: "cola",
-        name: "Cola 0.5",
-        desc: "Холодная классика к острым крыльям.",
-        price: 690,
-        spice: "cold",
+        id: "mango-habanero",
+        name: "Mango Habanero",
+        desc: "Манго-сладость и острый хабанеро. Самый яркий соус.",
+        price: 390,
+        spice: "hot",
+        image: media.mango,
       },
       {
-        id: "lemonade",
-        name: "Манго-лимонад",
-        desc: "Фирменный освежающий лимонад.",
-        price: 1190,
-        spice: "fresh",
+        id: "atomic-sauce",
+        name: "Atomic Sauce",
+        desc: "Фирменная острота для тех, кто хочет почувствовать жар.",
+        price: 390,
+        spice: "atomic",
+        image: media.atomic,
+      },
+      {
+        id: "garlic-parmesan",
+        name: "Garlic Parmesan",
+        desc: "Сливочный чеснок и пармезан. Мягко, насыщенно, очень к крыльям.",
+        price: 390,
+        spice: "creamy",
+        image: media.garlic,
+      },
+      {
+        id: "honey-bbq",
+        name: "Honey BBQ",
+        desc: "Сладко-дымный BBQ для крыльев, tenders и сэндвичей.",
+        price: 390,
+        spice: "sweet",
+        image: media.honey,
       },
     ],
   },
 ];
 
-const spotlightIds = ["classic-wings", "zaletit-box", "spicy-burger", "fries"];
-const newForYouIds = ["duo-box", "bbq-burger", "waffle-fries", "lemonade"];
-const sauceCards = ["Hot Buffalo", "Mango Habanero", "Garlic Parmesan", "Аджика BBQ"];
+const spotlightIds = ["classic-wings", "classic-combo", "aw-sandwich", "mango-habanero"];
+const newForYouIds = ["boneless-wings", "party-box", "bbq-sandwich", "mozzarella-sticks"];
 
 const formatPrice = (value) => `${value.toLocaleString("ru-RU")} ₸`;
 
@@ -164,7 +256,10 @@ const state = {
   selectedSauce: sauces[0],
   qty: 1,
   cart: [],
+  activeHero: "for-you",
 };
+
+let heroScrollLockUntil = 0;
 
 const menuList = document.querySelector("#menuList");
 const tabs = document.querySelector(".category-tabs");
@@ -176,6 +271,10 @@ const cartTotal = document.querySelector("#cartTotal");
 const checkoutTotal = document.querySelector("#checkoutTotal");
 const checkoutItems = document.querySelector("#checkoutItems");
 const heroVideo = document.querySelector(".hero-video");
+const heroFallback = document.querySelector(".hero-fallback");
+const heroTitle = document.querySelector("#heroTitle");
+const heroSubtitle = document.querySelector("#heroSubtitle");
+const modalImage = document.querySelector("#modalImage");
 
 function playHeroVideo() {
   if (!heroVideo) return;
@@ -185,14 +284,47 @@ function playHeroVideo() {
   }
 }
 
+function setHeroScene(sceneId) {
+  const scene = heroScenes[sceneId] ?? heroScenes["for-you"];
+  if (state.activeHero === sceneId && heroVideo?.currentSrc.includes(scene.video)) {
+    playHeroVideo();
+    return;
+  }
+  state.activeHero = sceneId;
+  heroTitle.textContent = scene.title;
+  heroSubtitle.textContent = scene.subtitle;
+  heroFallback.src = scene.poster;
+  heroVideo.poster = scene.poster;
+  const source = heroVideo.querySelector("source");
+  if (source.getAttribute("src") !== scene.video) {
+    source.setAttribute("src", scene.video);
+    heroVideo.load();
+  }
+  playHeroVideo();
+}
+
+function findProduct(id) {
+  for (const category of categories) {
+    const product = category.items.find((item) => item.id === id);
+    if (product) return { category, product };
+  }
+  return null;
+}
+
 function renderTabs() {
-  const labels = ["для тебя", "крылья", "комбо", "бургеры", "гарниры", "соусы"];
+  const labels = [
+    { title: "для тебя", target: "for-you" },
+    { title: "крылья", target: "wings" },
+    { title: "комбо", target: "combo" },
+    { title: "бургеры", target: "burgers" },
+    { title: "гарниры", target: "sides" },
+    { title: "соусы", target: "sauces" },
+  ];
   tabs.innerHTML = labels
-    .map((label, index) => {
-      const targets = ["for-you", "wings", "combo", "burgers", "sides", "sauces"];
-      const target = targets[index] ?? "for-you";
-      return `<button class="${index === 0 ? "active" : ""}" data-target="${target}" type="button">${label}</button>`;
-    })
+    .map(
+      (item, index) =>
+        `<button class="${index === 0 ? "active" : ""}" data-target="${item.target}" type="button">${item.title}</button>`
+    )
     .join("");
 }
 
@@ -201,22 +333,22 @@ function renderMenu() {
   const newForYou = newForYouIds.map((id) => findProduct(id)?.product).filter(Boolean);
 
   menuList.innerHTML = `
-    <section class="menu-section" id="for-you">
+    <section class="menu-section" id="for-you" data-hero="for-you">
       <h2 class="section-title">популярное сейчас</h2>
       <div class="product-row compact-row">
         ${spotlight.map((item) => renderProductCard(item, "compact")).join("")}
       </div>
     </section>
 
-    <section class="promo-strip">
+    <section class="promo-strip" data-hero="for-you">
       <div>
-        <strong>Закажи на 8 000 ₸</strong>
-        <span>и получи фирменный дип к крыльям</span>
+        <strong>Соус в подарок</strong>
+        <span>к заказу от 8 000 ₸ до конца дня</span>
       </div>
-      <i data-lucide="gift"></i>
+      <i data-lucide="flame"></i>
     </section>
 
-    <section class="menu-section feature-section">
+    <section class="menu-section feature-section" data-hero="for-you">
       <h2 class="section-title">новое для тебя</h2>
       <div class="product-row feature-row">
         ${newForYou.map((item) => renderProductCard(item, "feature")).join("")}
@@ -224,10 +356,9 @@ function renderMenu() {
     </section>
 
     ${categories
-      .filter((category) => category.id !== "drinks")
       .map(
         (category) => `
-          <section class="menu-section" id="${category.id}">
+          <section class="menu-section" id="${category.id}" data-hero="${category.id}">
             <h2 class="section-title">${category.title.toLowerCase()}</h2>
             <div class="product-row compact-row">
               ${category.items.map((item) => renderProductCard(item, "compact")).join("")}
@@ -236,23 +367,8 @@ function renderMenu() {
         `
       )
       .join("")}
-
-    <section class="menu-section" id="sauces">
-      <h2 class="section-title">соусы</h2>
-      <div class="sauce-card-row">
-        ${sauceCards
-          .map(
-            (sauce) => `
-              <button class="sauce-card" data-sauce-card="${sauce}" type="button">
-                <span>${sauce}</span>
-                <small>к крыльям</small>
-              </button>
-            `
-          )
-          .join("")}
-      </div>
-    </section>
   `;
+  setupHeroObserver();
 }
 
 function renderProductCard(item, variant) {
@@ -260,7 +376,7 @@ function renderProductCard(item, variant) {
   return `
     <article class="product-card ${isFeature ? "feature-card" : "compact-card"}" data-card-product="${item.id}">
       <div class="product-visual">
-        <img src="/zaletit-wings.jpg" alt="${item.name}" loading="lazy" />
+        <img src="${item.image}" alt="${item.name}" loading="lazy" />
         ${isFeature ? `<button class="add-button" data-product="${item.id}" type="button" aria-label="Добавить ${item.name}"><i data-lucide="plus"></i></button>` : ""}
       </div>
       <div class="product-info">
@@ -268,53 +384,56 @@ function renderProductCard(item, variant) {
         <p>${item.desc}</p>
         <div class="product-meta">
           <strong class="price">${formatPrice(item.price)}</strong>
-          ${isFeature ? `<span class="spice">${item.spice}</span>` : `<i data-lucide="chevron-right"></i>`}
+          <span class="spice">${item.spice}</span>
         </div>
       </div>
     </article>
   `;
 }
 
-function findProduct(productId) {
-  for (const category of categories) {
-    const product = category.items.find((item) => item.id === productId);
-    if (product) {
-      return { product, category };
-    }
-  }
-  return null;
+function setupHeroObserver() {
+  const sections = [...document.querySelectorAll(".menu-section[data-hero]")];
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    if (Date.now() < heroScrollLockUntil) return;
+    const marker = tabs.getBoundingClientRect().bottom + 48;
+    const current =
+      sections.find((section) => {
+        const rect = section.getBoundingClientRect();
+        return rect.top <= marker && rect.bottom > marker;
+      }) ?? sections.sort((a, b) => Math.abs(a.getBoundingClientRect().top - marker) - Math.abs(b.getBoundingClientRect().top - marker))[0];
+    if (current) activateTab(current.dataset.hero, false);
+  };
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    },
+    { passive: true }
+  );
+  update();
 }
 
-function openProduct(productId) {
-  const match = findProduct(productId);
-  if (!match) return;
-
-  state.selectedProduct = match.product;
-  state.selectedSize = match.product.sizes?.[0] ?? { label: "1 порция", price: match.product.price };
-  state.selectedSauce = sauces[0];
-  state.qty = 1;
-
-  document.querySelector("#modalCategory").textContent = match.category.title;
-  document.querySelector("#modalTitle").textContent = match.product.name;
-  document.querySelector("#modalDescription").textContent = match.product.desc;
-  document.querySelector("#qtyValue").textContent = state.qty;
-  renderSizeOptions();
-  renderSauceOptions();
-  updateAddButton();
-  productModal.showModal();
-  lucide.createIcons();
+function activateTab(target, shouldScroll = true) {
+  if (shouldScroll) heroScrollLockUntil = Date.now() + 2600;
+  tabs.querySelectorAll("button").forEach((tab) => tab.classList.toggle("active", tab.dataset.target === target));
+  setHeroScene(target);
+  if (shouldScroll) {
+    document.querySelector(`#${target}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 }
 
 function renderSizeOptions() {
-  const sizeBlock = document.querySelector("#sizeBlock");
-  const sizeOptions = document.querySelector("#sizeOptions");
   const sizes = state.selectedProduct.sizes ?? [{ label: "1 порция", price: state.selectedProduct.price }];
-  sizeBlock.hidden = sizes.length <= 1 && !state.selectedProduct.sizes;
-  sizeOptions.innerHTML = sizes
+  document.querySelector("#sizeBlock").classList.toggle("hidden", sizes.length <= 1 && state.selectedProduct.id.includes("sauce"));
+  document.querySelector("#sizeOptions").innerHTML = sizes
     .map(
       (size) => `
-        <button class="${size.label === state.selectedSize.label ? "active" : ""}" data-size="${size.label}" type="button">
-          ${size.label}<br>${formatPrice(size.price)}
+        <button class="${state.selectedSize?.label === size.label ? "active" : ""}" data-size="${size.label}" type="button">
+          ${size.label}<br><span>${formatPrice(size.price)}</span>
         </button>
       `
     )
@@ -323,23 +442,48 @@ function renderSizeOptions() {
 
 function renderSauceOptions() {
   document.querySelector("#sauceOptions").innerHTML = sauces
-    .map((sauce) => `<button class="${sauce === state.selectedSauce ? "active" : ""}" data-sauce="${sauce}" type="button">${sauce}</button>`)
+    .map(
+      (sauce) =>
+        `<button class="${state.selectedSauce === sauce ? "active" : ""}" data-sauce="${sauce}" type="button">${sauce}</button>`
+    )
     .join("");
 }
 
 function updateAddButton() {
-  const total = state.selectedSize.price * state.qty;
+  const total = (state.selectedSize?.price ?? state.selectedProduct.price) * state.qty;
   document.querySelector("#addToCart").textContent = `Добавить за ${formatPrice(total)}`;
 }
 
+function openProduct(id) {
+  const match = findProduct(id);
+  if (!match) return;
+  state.selectedProduct = match.product;
+  state.selectedSize = match.product.sizes?.[0] ?? { label: "1 порция", price: match.product.price };
+  state.selectedSauce = sauces[0];
+  state.qty = 1;
+
+  modalImage.src = match.product.image;
+  modalImage.alt = match.product.name;
+  document.querySelector("#modalCategory").textContent = match.category.title;
+  document.querySelector("#modalTitle").textContent = match.product.name;
+  document.querySelector("#modalDescription").textContent = match.product.desc;
+  document.querySelector("#qtyValue").textContent = state.qty;
+  renderSizeOptions();
+  renderSauceOptions();
+  updateAddButton();
+  productModal.showModal();
+}
+
 function addToCart() {
+  if (!state.selectedProduct) return;
+  const price = state.selectedSize?.price ?? state.selectedProduct.price;
   state.cart.push({
-    id: crypto.randomUUID(),
+    id: `${state.selectedProduct.id}-${Date.now()}`,
     name: state.selectedProduct.name,
-    size: state.selectedSize.label,
+    size: state.selectedSize?.label ?? "1 порция",
     sauce: state.selectedSauce,
     qty: state.qty,
-    price: state.selectedSize.price,
+    price,
   });
   productModal.close();
   renderCart();
@@ -372,9 +516,7 @@ function renderCart() {
 tabs.addEventListener("click", (event) => {
   const button = event.target.closest("button");
   if (!button) return;
-  tabs.querySelectorAll("button").forEach((tab) => tab.classList.remove("active"));
-  button.classList.add("active");
-  document.querySelector(`#${button.dataset.target}`).scrollIntoView({ behavior: "smooth", block: "start" });
+  activateTab(button.dataset.target);
 });
 
 menuList.addEventListener("click", (event) => {
@@ -422,7 +564,10 @@ renderTabs();
 renderMenu();
 renderCart();
 lucide.createIcons();
-playHeroVideo();
+setHeroScene("for-you");
+heroVideo?.addEventListener("loadeddata", playHeroVideo);
+heroVideo?.addEventListener("canplay", playHeroVideo);
+window.addEventListener("pageshow", playHeroVideo);
 document.addEventListener("visibilitychange", () => {
   if (!document.hidden) playHeroVideo();
 });

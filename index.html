@@ -12,7 +12,9 @@
   <body>
     <div class="app-shell">
       <header class="topbar">
-        <div class="brand-mark">zc</div>
+        <div class="brand-mark">
+          <img src="/assets/zaletit-wing-logo.svg" alt="ZALETIT CHICKEN" />
+        </div>
         <div class="location">
           <span>Доставка до 22:00</span>
           <strong>Алматы, Кабанбай батыра</strong>
@@ -24,14 +26,14 @@
 
       <main>
         <section class="hero">
-          <video class="hero-video" autoplay muted loop playsinline poster="/zaletit-wings.jpg" aria-label="Крылышки ZALETIT CHICKEN">
-            <source src="/hero-loop.mp4" type="video/mp4" />
+          <video class="hero-video" autoplay muted loop playsinline poster="/assets/clean-wings.png" aria-label="Крылышки ZALETIT CHICKEN">
+            <source src="/assets/hero-for-you.mp4" type="video/mp4" />
           </video>
-          <img class="hero-fallback" src="/zaletit-wings.jpg" alt="Крылышки ZALETIT CHICKEN" />
+          <img class="hero-fallback" src="/assets/clean-wings.png" alt="Крылышки ZALETIT CHICKEN" />
           <div class="hero-copy">
             <p>ZALETIT CHICKEN</p>
-            <h1>Поймай крыло волну</h1>
-            <span>Крылья, боксы и соусы, которые реально залетают</span>
+            <h1 id="heroTitle">Крылья, которые залетают</h1>
+            <span id="heroSubtitle">Хруст, соус и жар прямо в твоём боксе</span>
           </div>
         </section>
 
@@ -55,7 +57,7 @@
         <button class="icon-button close" value="cancel" aria-label="Закрыть">
           <i data-lucide="x"></i>
         </button>
-        <img src="/zaletit-wings.jpg" alt="" />
+        <img id="modalImage" src="/assets/clean-wings.png" alt="" />
         <div class="modal-body">
           <p class="eyebrow" id="modalCategory"></p>
           <h2 id="modalTitle"></h2>

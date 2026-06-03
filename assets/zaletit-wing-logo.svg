@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="ZALETIT CHICKEN wing logo">
+  <defs>
+    <linearGradient id="flame" x1="18" x2="104" y1="100" y2="18" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f24622"/>
+      <stop offset=".55" stop-color="#ffbf2f"/>
+      <stop offset="1" stop-color="#fff1bf"/>
+    </linearGradient>
+  </defs>
+  <circle cx="64" cy="64" r="58" fill="#17120f"/>
+  <path fill="url(#flame)" d="M29 73c15-31 43-49 77-51-7 18-21 35-39 47 16-3 27-9 37-17-7 20-24 36-48 45l9 12c-20-4-34-15-36-36Z"/>
+  <path fill="#fff6df" d="M38 72c16-18 35-30 57-36-13 14-27 24-44 31 15 1 27-1 39-7-10 13-25 23-43 28l6 8c-10-4-15-12-15-24Z" opacity=".95"/>
+  <path fill="#f24622" d="M31 82c15 2 30-1 44-9-7 11-19 19-35 24l6 8c-11-3-16-10-15-23Z"/>
+  <path fill="#17120f" d="M79 30c-18 7-35 17-49 32 6-21 26-38 49-32Z" opacity=".28"/>
+</svg>
