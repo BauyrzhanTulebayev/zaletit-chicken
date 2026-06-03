@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZALETIT CHICKEN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <button class="icon-button" aria-label="Меню">
+          <i data-lucide="menu"></i>
+        </button>
+        <div class="location">
+          <span>Доставка</span>
+          <strong>Алматы, Кабанбай батыра</strong>
+        </div>
+        <button class="icon-button" aria-label="Профиль">
+          <i data-lucide="user-round"></i>
+        </button>
+      </header>
+
+      <main>
+        <section class="hero">
+          <img src="/zaletit-wings.jpg" alt="Крылышки ZALETIT CHICKEN" />
+          <div class="hero-copy">
+            <p>ZALETIT CHICKEN</p>
+            <h1>Поймай крыло волну</h1>
+            <span>Крылья, боксы и соусы, которые реально залетают</span>
+          </div>
+        </section>
+
+        <nav class="category-tabs" aria-label="Категории меню"></nav>
+
+        <section class="menu-list" id="menuList" aria-live="polite"></section>
+      </main>
+
+      <button class="cart-bar hidden" id="cartBar" type="button" aria-label="Открыть корзину">
+        <span>
+          <i data-lucide="shopping-bag"></i>
+          <strong id="cartCount">0</strong>
+        </span>
+        <b>Корзина</b>
+        <strong id="cartTotal">0 ₸</strong>
+      </button>
+
+      <nav class="bottom-nav" aria-label="Навигация">
+        <button class="active" type="button"><i data-lucide="utensils"></i><span>Меню</span></button>
+        <button type="button"><i data-lucide="heart"></i><span>Хиты</span></button>
+        <button type="button"><i data-lucide="receipt-text"></i><span>Заказы</span></button>
+        <button type="button"><i data-lucide="user"></i><span>Профиль</span></button>
+      </nav>
+    </div>
+
+    <dialog class="product-modal" id="productModal">
+      <form method="dialog" class="modal-card">
+        <button class="icon-button close" value="cancel" aria-label="Закрыть">
+          <i data-lucide="x"></i>
+        </button>
+        <img src="/zaletit-wings.jpg" alt="" />
+        <div class="modal-body">
+          <p class="eyebrow" id="modalCategory"></p>
+          <h2 id="modalTitle"></h2>
+          <p id="modalDescription"></p>
+
+          <div class="option-block" id="sizeBlock">
+            <div class="option-title">
+              <span>Размер</span>
+              <small>выберите один</small>
+            </div>
+            <div class="option-grid" id="sizeOptions"></div>
+          </div>
+
+          <div class="option-block">
+            <div class="option-title">
+              <span>Соус</span>
+              <small>можно изменить</small>
+            </div>
+            <div class="sauce-list" id="sauceOptions"></div>
+          </div>
+
+          <div class="qty-row">
+            <button type="button" id="qtyMinus" aria-label="Уменьшить">
+              <i data-lucide="minus"></i>
+            </button>
+            <strong id="qtyValue">1</strong>
+            <button type="button" id="qtyPlus" aria-label="Увеличить">
+              <i data-lucide="plus"></i>
+            </button>
+          </div>
+        </div>
+        <button class="primary-button" id="addToCart" value="default" type="button">Добавить</button>
+      </form>
+    </dialog>
+
+    <dialog class="checkout-modal" id="checkoutModal">
+      <form method="dialog" class="checkout-card">
+        <div class="checkout-head">
+          <div>
+            <p class="eyebrow">заказ</p>
+            <h2>Корзина</h2>
+          </div>
+          <button class="icon-button" value="cancel" aria-label="Закрыть">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+        <div id="checkoutItems" class="checkout-items"></div>
+        <div class="delivery-panel">
+          <label>
+            <span>Адрес</span>
+            <input value="Алматы, Кабанбай батыра 85" />
+          </label>
+          <label>
+            <span>Комментарий</span>
+            <input placeholder="Домофон, подъезд, пожелания" />
+          </label>
+        </div>
+        <div class="summary-row">
+          <span>Итого</span>
+          <strong id="checkoutTotal">0 ₸</strong>
+        </div>
+        <button class="primary-button" value="default">Оформить заказ</button>
+      </form>
+    </dialog>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
