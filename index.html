@@ -26,16 +26,10 @@
 
       <main>
         <section class="hero">
-          <div class="hero-stage" id="heroStage" aria-label="ZALETIT CHICKEN">
-            <div class="hero-sauce hero-sauce-one"></div>
-            <div class="hero-sauce hero-sauce-two"></div>
-            <div class="hero-sparks"></div>
-            <img class="hero-food hero-main" id="heroMain" src="/assets/clean-wings.png" alt="" />
-            <img class="hero-food hero-side hero-side-one" id="heroSideOne" src="/assets/clean-fries.png" alt="" />
-            <img class="hero-food hero-side hero-side-two" id="heroSideTwo" src="/assets/clean-mango-habanero.png" alt="" />
-            <div class="hero-steam hero-steam-one"></div>
-            <div class="hero-steam hero-steam-two"></div>
-          </div>
+          <video class="hero-video" id="heroVideo" autoplay muted loop playsinline poster="/assets/category-hero/wings.png" aria-label="ZALETIT CHICKEN">
+            <source src="/assets/category-hero/hero-for-you.mp4" type="video/mp4" />
+          </video>
+          <img class="hero-fallback" id="heroFallback" src="/assets/category-hero/wings.png" alt="" />
           <div class="hero-copy">
             <p>ZALETIT CHICKEN</p>
             <h1 id="heroTitle">Крылья, которые залетают</h1>

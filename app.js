@@ -19,50 +19,38 @@ const heroScenes = {
   "for-you": {
     title: "Крылья, которые залетают",
     subtitle: "Хруст, соус и жар прямо в твоём боксе",
-    main: media.wings,
-    sideOne: media.fries,
-    sideTwo: media.mango,
-    tone: "fire",
+    video: "/assets/category-hero/hero-for-you.mp4",
+    poster: "/assets/category-hero/wings.png",
   },
   wings: {
     title: "Выбирай остроту",
     subtitle: "Classic, boneless или tenders с соусом на максимум",
-    main: media.wings,
-    sideOne: media.atomic,
-    sideTwo: media.nuclear,
-    tone: "hot",
+    video: "/assets/category-hero/hero-wings.mp4",
+    poster: "/assets/category-hero/wings.png",
   },
   combo: {
     title: "Бокс на компанию",
     subtitle: "Крылья, закуски, дипы и напиток без лишних решений",
-    main: media.tenders,
-    sideOne: media.fries,
-    sideTwo: media.ranch,
-    tone: "gold",
+    video: "/assets/category-hero/hero-combo.mp4",
+    poster: "/assets/category-hero/combo.png",
   },
   burgers: {
     title: "Сэндвич с характером",
     subtitle: "Сочная курица, соус и мягкая булка в один укус",
-    main: media.sandwich,
-    sideOne: media.bbqSandwich,
-    sideTwo: media.honey,
-    tone: "bbq",
+    video: "/assets/category-hero/hero-burgers.mp4",
+    poster: "/assets/category-hero/burgers.png",
   },
   sides: {
     title: "Добавь хруст",
     subtitle: "Waffle fries, сырные палочки и кольца к любым крыльям",
-    main: media.fries,
-    sideOne: media.mozzarella,
-    sideTwo: media.onionRings,
-    tone: "snack",
+    video: "/assets/category-hero/hero-sides.mp4",
+    poster: "/assets/category-hero/snacks.png",
   },
   sauces: {
     title: "Соус решает",
     subtitle: "От Honey BBQ до Nuclear: собери свой вкус",
-    main: media.mango,
-    sideOne: media.garlic,
-    sideTwo: media.blueCheese,
-    tone: "sauce",
+    video: "/assets/category-hero/hero-sauces.mp4",
+    poster: "/assets/category-hero/sauces.png",
   },
 };
 
@@ -289,10 +277,8 @@ const cartCount = document.querySelector("#cartCount");
 const cartTotal = document.querySelector("#cartTotal");
 const checkoutTotal = document.querySelector("#checkoutTotal");
 const checkoutItems = document.querySelector("#checkoutItems");
-const heroStage = document.querySelector("#heroStage");
-const heroMain = document.querySelector("#heroMain");
-const heroSideOne = document.querySelector("#heroSideOne");
-const heroSideTwo = document.querySelector("#heroSideTwo");
+const heroVideo = document.querySelector("#heroVideo");
+const heroFallback = document.querySelector("#heroFallback");
 const heroTitle = document.querySelector("#heroTitle");
 const heroSubtitle = document.querySelector("#heroSubtitle");
 const modalImage = document.querySelector("#modalImage");
@@ -307,15 +293,25 @@ function findProduct(id) {
 
 function setHeroScene(sceneId) {
   const scene = heroScenes[sceneId] ?? heroScenes["for-you"];
-  heroStage.dataset.tone = scene.tone;
-  heroStage.classList.remove("is-swapping");
-  void heroStage.offsetWidth;
-  heroStage.classList.add("is-swapping");
   heroTitle.textContent = scene.title;
   heroSubtitle.textContent = scene.subtitle;
-  heroMain.src = scene.main;
-  heroSideOne.src = scene.sideOne;
-  heroSideTwo.src = scene.sideTwo;
+
+  if (!heroVideo) return;
+  const source = heroVideo.querySelector("source");
+  if (heroFallback) heroFallback.src = scene.poster;
+  heroVideo.poster = scene.poster;
+
+  if (source && source.getAttribute("src") !== scene.video) {
+    source.setAttribute("src", scene.video);
+    heroVideo.load();
+  }
+
+  playHeroVideo();
+}
+
+function playHeroVideo() {
+  const playPromise = heroVideo?.play();
+  if (playPromise?.catch) playPromise.catch(() => {});
 }
 
 function renderTabs() {
@@ -400,11 +396,13 @@ function renderProductCard(item, variant) {
 
 function activateTab(target) {
   if (state.activeTab === target) return;
+  const keepHeroInView = window.scrollY < 220;
   state.activeTab = target;
   renderTabs();
   setHeroScene(target);
   renderMenu();
   menuList.scrollLeft = 0;
+  if (keepHeroInView) window.scrollTo(0, 0);
 }
 
 function renderSizeOptions() {
@@ -540,6 +538,11 @@ document.querySelector("#qtyPlus").addEventListener("click", () => {
 
 document.querySelector("#addToCart").addEventListener("click", addToCart);
 cartBar.addEventListener("click", () => checkoutModal.showModal());
+heroVideo?.addEventListener("canplay", playHeroVideo);
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) playHeroVideo();
+});
+window.addEventListener("pageshow", playHeroVideo);
 
 renderTabs();
 setHeroScene(state.activeTab);

@@ -134,10 +134,25 @@ button {
   min-height: 560px;
   overflow: hidden;
   border-radius: 0;
-  background:
-    radial-gradient(circle at 18% 22%, rgba(255, 191, 47, 0.55), transparent 26%),
-    radial-gradient(circle at 82% 28%, rgba(242, 70, 34, 0.46), transparent 34%),
-    linear-gradient(165deg, #fff5dc 0%, #ffc95a 44%, #f24622 100%);
+  background: #17120f;
+}
+
+.hero-video,
+.hero-fallback {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-video {
+  z-index: 1;
+}
+
+.hero-fallback {
+  z-index: 0;
 }
 
 .hero-stage {
@@ -212,7 +227,7 @@ button {
 
 .hero-food {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   display: block;
   object-fit: contain;
   filter: drop-shadow(0 26px 30px rgba(48, 22, 8, 0.24));
@@ -249,7 +264,7 @@ button {
 
 .hero-steam {
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   width: 64px;
   height: 160px;
   border-left: 4px solid rgba(255, 255, 255, 0.75);
@@ -299,8 +314,12 @@ button {
 .hero::after {
   position: absolute;
   inset: 0;
+  z-index: 1;
   content: "";
-  background: linear-gradient(180deg, rgba(255, 199, 54, 0) 0%, rgba(255, 234, 192, 0.08) 45%, rgba(243, 247, 245, 0.34) 69%, var(--paper) 91%);
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.34) 0%, rgba(0, 0, 0, 0) 25%),
+    linear-gradient(180deg, rgba(255, 199, 54, 0) 0%, rgba(255, 234, 192, 0.08) 45%, rgba(243, 247, 245, 0.34) 69%, var(--paper) 91%);
+  pointer-events: none;
 }
 
 .hero-copy {
@@ -308,7 +327,7 @@ button {
   right: 24px;
   bottom: 118px;
   left: 24px;
-  z-index: 1;
+  z-index: 2;
   color: var(--ink);
   text-align: center;
 }
