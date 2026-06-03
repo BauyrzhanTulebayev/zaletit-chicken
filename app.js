@@ -175,6 +175,15 @@ const cartCount = document.querySelector("#cartCount");
 const cartTotal = document.querySelector("#cartTotal");
 const checkoutTotal = document.querySelector("#checkoutTotal");
 const checkoutItems = document.querySelector("#checkoutItems");
+const heroVideo = document.querySelector(".hero-video");
+
+function playHeroVideo() {
+  if (!heroVideo) return;
+  const attempt = heroVideo.play();
+  if (attempt && typeof attempt.catch === "function") {
+    attempt.catch(() => {});
+  }
+}
 
 function renderTabs() {
   const labels = ["для тебя", "крылья", "комбо", "бургеры", "гарниры", "соусы"];
@@ -413,3 +422,7 @@ renderTabs();
 renderMenu();
 renderCart();
 lucide.createIcons();
+playHeroVideo();
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) playHeroVideo();
+});
