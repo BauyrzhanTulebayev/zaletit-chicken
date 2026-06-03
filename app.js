@@ -17,40 +17,52 @@ const media = {
 
 const heroScenes = {
   "for-you": {
-    video: "/assets/hero-for-you.mp4",
-    poster: media.wings,
     title: "Крылья, которые залетают",
     subtitle: "Хруст, соус и жар прямо в твоём боксе",
+    main: media.wings,
+    sideOne: media.fries,
+    sideTwo: media.mango,
+    tone: "fire",
   },
   wings: {
-    video: "/assets/hero-wings.mp4",
-    poster: media.wings,
     title: "Выбирай остроту",
     subtitle: "Classic, boneless или tenders с соусом на максимум",
+    main: media.wings,
+    sideOne: media.atomic,
+    sideTwo: media.nuclear,
+    tone: "hot",
   },
   combo: {
-    video: "/assets/hero-combo.mp4",
-    poster: media.tenders,
     title: "Бокс на компанию",
-    subtitle: "Крылья, фри, дипы и напиток без лишних решений",
+    subtitle: "Крылья, закуски, дипы и напиток без лишних решений",
+    main: media.tenders,
+    sideOne: media.fries,
+    sideTwo: media.ranch,
+    tone: "gold",
   },
   burgers: {
-    video: "/assets/hero-burgers.mp4",
-    poster: media.sandwich,
     title: "Сэндвич с характером",
     subtitle: "Сочная курица, соус и мягкая булка в один укус",
+    main: media.sandwich,
+    sideOne: media.bbqSandwich,
+    sideTwo: media.honey,
+    tone: "bbq",
   },
   sides: {
-    video: "/assets/hero-sides.mp4",
-    poster: media.fries,
     title: "Добавь хруст",
     subtitle: "Waffle fries, сырные палочки и кольца к любым крыльям",
+    main: media.fries,
+    sideOne: media.mozzarella,
+    sideTwo: media.onionRings,
+    tone: "snack",
   },
   sauces: {
-    video: "/assets/hero-sauces.mp4",
-    poster: media.mango,
     title: "Соус решает",
     subtitle: "От Honey BBQ до Nuclear: собери свой вкус",
+    main: media.mango,
+    sideOne: media.garlic,
+    sideTwo: media.blueCheese,
+    tone: "sauce",
   },
 };
 
@@ -130,7 +142,7 @@ const categories = [
       {
         id: "boneless-combo",
         name: "Boneless Combo",
-        desc: "Boneless wings, фри, дип и напиток. Удобно есть на ходу.",
+        desc: "Boneless wings, закуски, дип и напиток. Удобно есть на ходу.",
         price: 3890,
         spice: "15 мин",
         image: media.tenders,
@@ -177,14 +189,14 @@ const categories = [
   },
   {
     id: "sides",
-    title: "Гарниры",
+    title: "Закуски",
     items: [
       {
         id: "waffle-fries",
         name: "Famous Waffle Fries",
         desc: "Рифлёная картошка, которая держит соус лучше обычной фри.",
         price: 1290,
-        spice: "side",
+        spice: "snack",
         image: media.fries,
       },
       {
@@ -245,21 +257,28 @@ const categories = [
   },
 ];
 
+const tabItems = [
+  { title: "для тебя", target: "for-you" },
+  { title: "крылья", target: "wings" },
+  { title: "комбо", target: "combo" },
+  { title: "бургеры", target: "burgers" },
+  { title: "закуски", target: "sides" },
+  { title: "соусы", target: "sauces" },
+];
+
 const spotlightIds = ["classic-wings", "classic-combo", "aw-sandwich", "mango-habanero"];
 const newForYouIds = ["boneless-wings", "party-box", "bbq-sandwich", "mozzarella-sticks"];
 
 const formatPrice = (value) => `${value.toLocaleString("ru-RU")} ₸`;
 
 const state = {
+  activeTab: "for-you",
   selectedProduct: null,
   selectedSize: null,
   selectedSauce: sauces[0],
   qty: 1,
   cart: [],
-  activeHero: "for-you",
 };
-
-let heroScrollLockUntil = 0;
 
 const menuList = document.querySelector("#menuList");
 const tabs = document.querySelector(".category-tabs");
@@ -270,38 +289,13 @@ const cartCount = document.querySelector("#cartCount");
 const cartTotal = document.querySelector("#cartTotal");
 const checkoutTotal = document.querySelector("#checkoutTotal");
 const checkoutItems = document.querySelector("#checkoutItems");
-const heroVideo = document.querySelector(".hero-video");
-const heroFallback = document.querySelector(".hero-fallback");
+const heroStage = document.querySelector("#heroStage");
+const heroMain = document.querySelector("#heroMain");
+const heroSideOne = document.querySelector("#heroSideOne");
+const heroSideTwo = document.querySelector("#heroSideTwo");
 const heroTitle = document.querySelector("#heroTitle");
 const heroSubtitle = document.querySelector("#heroSubtitle");
 const modalImage = document.querySelector("#modalImage");
-
-function playHeroVideo() {
-  if (!heroVideo) return;
-  const attempt = heroVideo.play();
-  if (attempt && typeof attempt.catch === "function") {
-    attempt.catch(() => {});
-  }
-}
-
-function setHeroScene(sceneId) {
-  const scene = heroScenes[sceneId] ?? heroScenes["for-you"];
-  if (state.activeHero === sceneId && heroVideo?.currentSrc.includes(scene.video)) {
-    playHeroVideo();
-    return;
-  }
-  state.activeHero = sceneId;
-  heroTitle.textContent = scene.title;
-  heroSubtitle.textContent = scene.subtitle;
-  heroFallback.src = scene.poster;
-  heroVideo.poster = scene.poster;
-  const source = heroVideo.querySelector("source");
-  if (source.getAttribute("src") !== scene.video) {
-    source.setAttribute("src", scene.video);
-    heroVideo.load();
-  }
-  playHeroVideo();
-}
 
 function findProduct(id) {
   for (const category of categories) {
@@ -311,36 +305,50 @@ function findProduct(id) {
   return null;
 }
 
+function setHeroScene(sceneId) {
+  const scene = heroScenes[sceneId] ?? heroScenes["for-you"];
+  heroStage.dataset.tone = scene.tone;
+  heroStage.classList.remove("is-swapping");
+  void heroStage.offsetWidth;
+  heroStage.classList.add("is-swapping");
+  heroTitle.textContent = scene.title;
+  heroSubtitle.textContent = scene.subtitle;
+  heroMain.src = scene.main;
+  heroSideOne.src = scene.sideOne;
+  heroSideTwo.src = scene.sideTwo;
+}
+
 function renderTabs() {
-  const labels = [
-    { title: "для тебя", target: "for-you" },
-    { title: "крылья", target: "wings" },
-    { title: "комбо", target: "combo" },
-    { title: "бургеры", target: "burgers" },
-    { title: "гарниры", target: "sides" },
-    { title: "соусы", target: "sauces" },
-  ];
-  tabs.innerHTML = labels
+  tabs.innerHTML = tabItems
     .map(
-      (item, index) =>
-        `<button class="${index === 0 ? "active" : ""}" data-target="${item.target}" type="button">${item.title}</button>`
+      (item) =>
+        `<button class="${state.activeTab === item.target ? "active" : ""}" data-target="${item.target}" type="button">${item.title}</button>`
     )
     .join("");
 }
 
 function renderMenu() {
+  const html = state.activeTab === "for-you" ? renderForYou() : renderCategory(state.activeTab);
+  menuList.classList.remove("is-swapping");
+  void menuList.offsetWidth;
+  menuList.classList.add("is-swapping");
+  menuList.innerHTML = html;
+  lucide.createIcons();
+}
+
+function renderForYou() {
   const spotlight = spotlightIds.map((id) => findProduct(id)?.product).filter(Boolean);
   const newForYou = newForYouIds.map((id) => findProduct(id)?.product).filter(Boolean);
 
-  menuList.innerHTML = `
-    <section class="menu-section" id="for-you" data-hero="for-you">
+  return `
+    <section class="menu-section menu-panel" data-panel="for-you">
       <h2 class="section-title">популярное сейчас</h2>
       <div class="product-row compact-row">
         ${spotlight.map((item) => renderProductCard(item, "compact")).join("")}
       </div>
     </section>
 
-    <section class="promo-strip" data-hero="for-you">
+    <section class="promo-strip">
       <div>
         <strong>Соус в подарок</strong>
         <span>к заказу от 8 000 ₸ до конца дня</span>
@@ -348,27 +356,26 @@ function renderMenu() {
       <i data-lucide="flame"></i>
     </section>
 
-    <section class="menu-section feature-section" data-hero="for-you">
+    <section class="menu-section menu-panel">
       <h2 class="section-title">новое для тебя</h2>
       <div class="product-row feature-row">
         ${newForYou.map((item) => renderProductCard(item, "feature")).join("")}
       </div>
     </section>
-
-    ${categories
-      .map(
-        (category) => `
-          <section class="menu-section" id="${category.id}" data-hero="${category.id}">
-            <h2 class="section-title">${category.title.toLowerCase()}</h2>
-            <div class="product-row compact-row">
-              ${category.items.map((item) => renderProductCard(item, "compact")).join("")}
-            </div>
-          </section>
-        `
-      )
-      .join("")}
   `;
-  setupHeroObserver();
+}
+
+function renderCategory(categoryId) {
+  const category = categories.find((item) => item.id === categoryId);
+  if (!category) return renderForYou();
+  return `
+    <section class="menu-section menu-panel" data-panel="${category.id}">
+      <h2 class="section-title">${category.title.toLowerCase()}</h2>
+      <div class="product-row compact-row">
+        ${category.items.map((item) => renderProductCard(item, "compact")).join("")}
+      </div>
+    </section>
+  `;
 }
 
 function renderProductCard(item, variant) {
@@ -391,39 +398,13 @@ function renderProductCard(item, variant) {
   `;
 }
 
-function setupHeroObserver() {
-  const sections = [...document.querySelectorAll(".menu-section[data-hero]")];
-  let ticking = false;
-  const update = () => {
-    ticking = false;
-    if (Date.now() < heroScrollLockUntil) return;
-    const marker = tabs.getBoundingClientRect().bottom + 48;
-    const current =
-      sections.find((section) => {
-        const rect = section.getBoundingClientRect();
-        return rect.top <= marker && rect.bottom > marker;
-      }) ?? sections.sort((a, b) => Math.abs(a.getBoundingClientRect().top - marker) - Math.abs(b.getBoundingClientRect().top - marker))[0];
-    if (current) activateTab(current.dataset.hero, false);
-  };
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(update);
-    },
-    { passive: true }
-  );
-  update();
-}
-
-function activateTab(target, shouldScroll = true) {
-  if (shouldScroll) heroScrollLockUntil = Date.now() + 2600;
-  tabs.querySelectorAll("button").forEach((tab) => tab.classList.toggle("active", tab.dataset.target === target));
+function activateTab(target) {
+  if (state.activeTab === target) return;
+  state.activeTab = target;
+  renderTabs();
   setHeroScene(target);
-  if (shouldScroll) {
-    document.querySelector(`#${target}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
+  renderMenu();
+  menuList.scrollLeft = 0;
 }
 
 function renderSizeOptions() {
@@ -561,13 +542,7 @@ document.querySelector("#addToCart").addEventListener("click", addToCart);
 cartBar.addEventListener("click", () => checkoutModal.showModal());
 
 renderTabs();
+setHeroScene(state.activeTab);
 renderMenu();
 renderCart();
 lucide.createIcons();
-setHeroScene("for-you");
-heroVideo?.addEventListener("loadeddata", playHeroVideo);
-heroVideo?.addEventListener("canplay", playHeroVideo);
-window.addEventListener("pageshow", playHeroVideo);
-document.addEventListener("visibilitychange", () => {
-  if (!document.hidden) playHeroVideo();
-});

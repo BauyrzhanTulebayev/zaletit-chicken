@@ -1,14 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="ZALETIT CHICKEN wing logo">
   <defs>
-    <linearGradient id="flame" x1="18" x2="104" y1="100" y2="18" gradientUnits="userSpaceOnUse">
+    <linearGradient id="wingHot" x1="18" x2="111" y1="92" y2="21" gradientUnits="userSpaceOnUse">
       <stop stop-color="#f24622"/>
-      <stop offset=".55" stop-color="#ffbf2f"/>
-      <stop offset="1" stop-color="#fff1bf"/>
+      <stop offset=".5" stop-color="#ffbf2f"/>
+      <stop offset="1" stop-color="#fff4c7"/>
+    </linearGradient>
+    <linearGradient id="wingRed" x1="28" x2="93" y1="104" y2="43" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#c92d14"/>
+      <stop offset="1" stop-color="#f24622"/>
     </linearGradient>
   </defs>
-  <circle cx="64" cy="64" r="58" fill="#17120f"/>
-  <path fill="url(#flame)" d="M29 73c15-31 43-49 77-51-7 18-21 35-39 47 16-3 27-9 37-17-7 20-24 36-48 45l9 12c-20-4-34-15-36-36Z"/>
-  <path fill="#fff6df" d="M38 72c16-18 35-30 57-36-13 14-27 24-44 31 15 1 27-1 39-7-10 13-25 23-43 28l6 8c-10-4-15-12-15-24Z" opacity=".95"/>
-  <path fill="#f24622" d="M31 82c15 2 30-1 44-9-7 11-19 19-35 24l6 8c-11-3-16-10-15-23Z"/>
-  <path fill="#17120f" d="M79 30c-18 7-35 17-49 32 6-21 26-38 49-32Z" opacity=".28"/>
+  <path fill="url(#wingHot)" d="M19 79c9-27 33-49 71-62 9-3 18-4 26-4-7 24-25 44-54 60 19-3 34-9 48-20-8 29-34 51-73 62l12 10c-18-2-31-9-39-20 12 1 28-3 44-12-14 3-26 3-35-1-2-4-2-8 0-13Z"/>
+  <path fill="#fff2bf" d="M31 75c14-21 35-37 64-47-10 17-27 31-49 42 18 1 33-3 48-11-13 16-33 28-60 36l7 7c-13-4-17-12-10-27Z" opacity=".92"/>
+  <path fill="url(#wingRed)" d="M18 83c13 6 32 6 55-2-14 15-31 25-53 29l10 10C15 116 8 103 18 83Z"/>
+  <path fill="#17120f" d="M82 25c-21 8-40 22-56 41 2-21 28-48 56-41Z" opacity=".18"/>
+  <path fill="#17120f" d="M30 75c18-14 39-25 62-32-14 12-32 22-54 30 17 3 32 2 45-2-14 10-29 15-45 16-8-1-11-5-8-12Z" opacity=".12"/>
 </svg>
