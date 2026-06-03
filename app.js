@@ -152,6 +152,10 @@ const categories = [
   },
 ];
 
+const spotlightIds = ["classic-wings", "zaletit-box", "spicy-burger", "fries"];
+const newForYouIds = ["duo-box", "bbq-burger", "waffle-fries", "lemonade"];
+const sauceCards = ["Hot Buffalo", "Mango Habanero", "Garlic Parmesan", "Аджика BBQ"];
+
 const formatPrice = (value) => `${value.toLocaleString("ru-RU")} ₸`;
 
 const state = {
@@ -173,62 +177,93 @@ const checkoutTotal = document.querySelector("#checkoutTotal");
 const checkoutItems = document.querySelector("#checkoutItems");
 
 function renderTabs() {
-  const labels = ["для тебя", "крылья", "комбо", "бургеры", "гарниры", "напитки"];
+  const labels = ["для тебя", "крылья", "комбо", "бургеры", "гарниры", "соусы"];
   tabs.innerHTML = labels
     .map((label, index) => {
-      const target = index === 0 ? categories[0].id : categories[index - 1]?.id ?? categories[0].id;
+      const targets = ["for-you", "wings", "combo", "burgers", "sides", "sauces"];
+      const target = targets[index] ?? "for-you";
       return `<button class="${index === 0 ? "active" : ""}" data-target="${target}" type="button">${label}</button>`;
     })
     .join("");
 }
 
 function renderMenu() {
-  menuList.innerHTML = categories
-    .map((category, categoryIndex) => {
-      const section = `
-        <section class="menu-section" id="${category.id}">
-          <h2 class="section-title">${category.title}</h2>
-          <div class="product-row">
-            ${category.items
-              .map(
-                (item) => `
-                <article class="product-card">
-                  <div class="product-visual">
-                    <img src="/zaletit-wings.jpg" alt="${item.name}" loading="lazy" />
-                    <button class="add-button" data-product="${item.id}" type="button" aria-label="Добавить ${item.name}">
-                      <i data-lucide="plus"></i>
-                    </button>
-                  </div>
-                  <div class="product-info">
-                    <h3>${item.name}</h3>
-                    <p>${item.desc}</p>
-                    <div class="product-meta">
-                      <strong class="price">${formatPrice(item.price)}</strong>
-                      <span class="spice">${item.spice}</span>
-                    </div>
-                  </div>
-                </article>
-              `
-              )
-              .join("")}
-          </div>
-        </section>
-      `;
+  const spotlight = spotlightIds.map((id) => findProduct(id)?.product).filter(Boolean);
+  const newForYou = newForYouIds.map((id) => findProduct(id)?.product).filter(Boolean);
 
-      if (categoryIndex === 0) {
-        return `${section}
-          <section class="promo-strip">
-            <div>
-              <strong>Закажи от 8 000 ₸</strong>
-              <span>и получи фирменный дип бесплатно</span>
+  menuList.innerHTML = `
+    <section class="menu-section" id="for-you">
+      <h2 class="section-title">популярное сейчас</h2>
+      <div class="product-row compact-row">
+        ${spotlight.map((item) => renderProductCard(item, "compact")).join("")}
+      </div>
+    </section>
+
+    <section class="promo-strip">
+      <div>
+        <strong>Закажи на 8 000 ₸</strong>
+        <span>и получи фирменный дип к крыльям</span>
+      </div>
+      <i data-lucide="gift"></i>
+    </section>
+
+    <section class="menu-section feature-section">
+      <h2 class="section-title">новое для тебя</h2>
+      <div class="product-row feature-row">
+        ${newForYou.map((item) => renderProductCard(item, "feature")).join("")}
+      </div>
+    </section>
+
+    ${categories
+      .filter((category) => category.id !== "drinks")
+      .map(
+        (category) => `
+          <section class="menu-section" id="${category.id}">
+            <h2 class="section-title">${category.title.toLowerCase()}</h2>
+            <div class="product-row compact-row">
+              ${category.items.map((item) => renderProductCard(item, "compact")).join("")}
             </div>
-            <i data-lucide="gift"></i>
-          </section>`;
-      }
+          </section>
+        `
+      )
+      .join("")}
 
-      return section;
-    })
-    .join("");
+    <section class="menu-section" id="sauces">
+      <h2 class="section-title">соусы</h2>
+      <div class="sauce-card-row">
+        ${sauceCards
+          .map(
+            (sauce) => `
+              <button class="sauce-card" data-sauce-card="${sauce}" type="button">
+                <span>${sauce}</span>
+                <small>к крыльям</small>
+              </button>
+            `
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderProductCard(item, variant) {
+  const isFeature = variant === "feature";
+  return `
+    <article class="product-card ${isFeature ? "feature-card" : "compact-card"}" data-card-product="${item.id}">
+      <div class="product-visual">
+        <img src="/zaletit-wings.jpg" alt="${item.name}" loading="lazy" />
+        ${isFeature ? `<button class="add-button" data-product="${item.id}" type="button" aria-label="Добавить ${item.name}"><i data-lucide="plus"></i></button>` : ""}
+      </div>
+      <div class="product-info">
+        <h3>${item.name}</h3>
+        <p>${item.desc}</p>
+        <div class="product-meta">
+          <strong class="price">${formatPrice(item.price)}</strong>
+          ${isFeature ? `<span class="spice">${item.spice}</span>` : `<i data-lucide="chevron-right"></i>`}
+        </div>
+      </div>
+    </article>
+  `;
 }
 
 function findProduct(productId) {
@@ -335,7 +370,12 @@ tabs.addEventListener("click", (event) => {
 
 menuList.addEventListener("click", (event) => {
   const button = event.target.closest("[data-product]");
-  if (button) openProduct(button.dataset.product);
+  const card = event.target.closest("[data-card-product]");
+  if (button) {
+    openProduct(button.dataset.product);
+    return;
+  }
+  if (card) openProduct(card.dataset.cardProduct);
 });
 
 document.querySelector("#sizeOptions").addEventListener("click", (event) => {

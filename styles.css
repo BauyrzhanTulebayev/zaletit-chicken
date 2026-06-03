@@ -1,13 +1,13 @@
 :root {
   --ink: #17120f;
-  --muted: #70665f;
-  --line: #ece8e3;
-  --paper: #f4f7f5;
+  --muted: #7b716b;
+  --line: #eee7df;
+  --paper: #f3f7f5;
   --card: #ffffff;
-  --hot: #ff4b22;
+  --hot: #f24622;
   --hot-dark: #c92d14;
-  --gold: #ffc33d;
-  --leaf: #179e6c;
+  --gold: #ffbf2f;
+  --cream: #fff3df;
   --charcoal: #211b18;
   --shadow: 0 16px 34px rgba(42, 25, 14, 0.08);
 }
@@ -40,7 +40,7 @@ button {
   margin: 0 auto;
   overflow: hidden;
   background: var(--paper);
-  padding: 0 0 96px;
+  padding: 0 0 34px;
 }
 
 .topbar,
@@ -65,6 +65,7 @@ button {
   backdrop-filter: none;
 }
 
+.brand-mark,
 .icon-button {
   display: grid;
   width: 42px;
@@ -75,6 +76,16 @@ button {
   background: rgba(255, 255, 255, 0.88);
   color: var(--ink);
   box-shadow: 0 8px 24px rgba(41, 26, 13, 0.1);
+}
+
+.brand-mark {
+  border: 0;
+  background: var(--gold);
+  color: var(--hot-dark);
+  font-size: 17px;
+  font-weight: 900;
+  text-transform: uppercase;
+  transform: rotate(-9deg);
 }
 
 .icon-button svg,
@@ -98,7 +109,7 @@ button {
   display: block;
   color: var(--hot);
   font-size: 11px;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: 0;
   text-transform: uppercase;
 }
@@ -106,14 +117,15 @@ button {
 .location strong {
   display: block;
   overflow: hidden;
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 700;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .hero {
   position: relative;
-  min-height: 520px;
+  min-height: 560px;
   overflow: hidden;
   border-radius: 0;
   background: var(--charcoal);
@@ -125,19 +137,20 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transform: scale(1.03);
 }
 
 .hero::after {
   position: absolute;
   inset: 0;
   content: "";
-  background: linear-gradient(180deg, rgba(255, 196, 62, 0.02) 0%, rgba(255, 239, 201, 0.1) 48%, var(--paper) 91%);
+  background: linear-gradient(180deg, rgba(255, 199, 54, 0) 0%, rgba(255, 234, 192, 0.08) 45%, rgba(243, 247, 245, 0.34) 69%, var(--paper) 91%);
 }
 
 .hero-copy {
   position: absolute;
   right: 24px;
-  bottom: 112px;
+  bottom: 118px;
   left: 24px;
   z-index: 1;
   color: var(--ink);
@@ -154,8 +167,8 @@ button {
 .hero-copy h1 {
   max-width: none;
   margin: 0;
-  font-size: 26px;
-  font-weight: 600;
+  font-size: 27px;
+  font-weight: 500;
   line-height: 1.12;
 }
 
@@ -163,7 +176,7 @@ button {
   display: block;
   max-width: 270px;
   margin: 10px auto 0;
-  color: rgba(23, 18, 15, 0.7);
+  color: rgba(23, 18, 15, 0.62);
   font-size: 12px;
   font-weight: 600;
   line-height: 1.4;
@@ -175,10 +188,10 @@ button {
   z-index: 9;
   display: flex;
   gap: 24px;
-  margin: -82px 0 0;
+  margin: -88px 0 0;
   overflow-x: auto;
-  padding: 24px 24px 14px;
-  background: linear-gradient(180deg, rgba(244, 247, 245, 0.76), var(--paper) 62%);
+  padding: 26px 24px 12px;
+  background: linear-gradient(180deg, rgba(243, 247, 245, 0.66), var(--paper) 62%);
   backdrop-filter: blur(18px);
   scrollbar-width: none;
 }
@@ -195,7 +208,7 @@ button {
   background: transparent;
   color: rgba(23, 18, 15, 0.34);
   font-size: 17px;
-  font-weight: 600;
+  font-weight: 500;
   padding: 0;
 }
 
@@ -205,13 +218,13 @@ button {
 }
 
 .menu-section {
-  padding: 0 0 18px 24px;
+  padding: 0 0 28px 24px;
 }
 
 .section-title {
   margin: 12px 0 14px;
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0;
 }
 
@@ -231,16 +244,22 @@ button {
 .product-card {
   display: flex;
   flex: 0 0 142px;
-  min-height: 238px;
+  min-height: 234px;
   flex-direction: column;
   gap: 0;
   margin-bottom: 0;
   overflow: hidden;
   border: 0;
-  border-radius: 16px;
+  border-radius: 15px;
   background: var(--card);
   scroll-snap-align: start;
-  box-shadow: 0 8px 22px rgba(35, 46, 42, 0.05);
+  box-shadow: 0 8px 22px rgba(35, 46, 42, 0.045);
+}
+
+.feature-card {
+  flex-basis: 292px;
+  min-height: 392px;
+  border-radius: 28px;
 }
 
 .product-info {
@@ -251,10 +270,14 @@ button {
   padding: 10px 12px 12px;
 }
 
+.feature-card .product-info {
+  padding: 14px 16px 16px;
+}
+
 .product-info h3 {
   margin: 0 0 6px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.2;
 }
 
@@ -271,6 +294,16 @@ button {
   -webkit-line-clamp: 2;
 }
 
+.feature-card .product-info h3 {
+  font-size: 18px;
+  line-height: 1.15;
+}
+
+.feature-card .product-info p {
+  min-height: 42px;
+  font-size: 13px;
+}
+
 .product-meta {
   display: flex;
   align-items: center;
@@ -283,6 +316,13 @@ button {
 .price {
   font-size: 13px;
   font-weight: 600;
+}
+
+.product-meta svg {
+  width: 15px;
+  height: 15px;
+  color: rgba(23, 18, 15, 0.18);
+  stroke-width: 2.2;
 }
 
 .spice {
@@ -298,8 +338,13 @@ button {
   position: relative;
   overflow: hidden;
   height: 118px;
-  border-radius: 16px 16px 0 0;
-  background: #f6eee5;
+  border-radius: 15px 15px 0 0;
+  background: var(--cream);
+}
+
+.feature-card .product-visual {
+  height: 252px;
+  border-radius: 28px 28px 0 0;
 }
 
 .product-visual img {
@@ -323,15 +368,22 @@ button {
   box-shadow: 0 8px 20px rgba(23, 18, 15, 0.1);
 }
 
+.feature-card .add-button {
+  width: 42px;
+  height: 42px;
+  right: 14px;
+  bottom: 14px;
+}
+
 .promo-strip {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 14px;
   min-height: 84px;
-  margin: 4px 24px 28px;
+  margin: 0 24px 30px;
   padding: 18px 20px;
-  border-radius: 18px;
+  border-radius: 20px;
   background: var(--card);
   box-shadow: 0 8px 22px rgba(35, 46, 42, 0.05);
 }
@@ -343,7 +395,7 @@ button {
 
 .promo-strip strong {
   font-size: 17px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .promo-strip span {
@@ -363,7 +415,7 @@ button {
 .cart-bar {
   position: fixed;
   right: max(14px, calc((100vw - 460px) / 2 + 14px));
-  bottom: 76px;
+  bottom: 18px;
   left: max(14px, calc((100vw - 460px) / 2 + 14px));
   z-index: 20;
   display: grid;
@@ -373,7 +425,7 @@ button {
   min-height: 56px;
   border: 0;
   border-radius: 18px;
-  background: var(--ink);
+  background: #17120f;
   color: #fff;
   padding: 0 18px;
   box-shadow: 0 16px 38px rgba(23, 18, 15, 0.26);
@@ -389,34 +441,39 @@ button {
   display: none;
 }
 
-.bottom-nav {
-  position: fixed;
-  right: max(0px, calc((100vw - 460px) / 2));
-  bottom: 0;
-  left: max(0px, calc((100vw - 460px) / 2));
-  z-index: 18;
+.sauce-card-row {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  width: min(100%, 460px);
-  margin: 0 auto;
-  border-top: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(18px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding-right: 24px;
 }
 
-.bottom-nav button {
-  display: grid;
-  min-height: 64px;
-  place-items: center;
+.sauce-card {
+  min-height: 86px;
   border: 0;
-  background: transparent;
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 800;
+  border-radius: 20px;
+  background: var(--card);
+  color: var(--ink);
+  padding: 16px;
+  text-align: left;
+  box-shadow: 0 8px 22px rgba(35, 46, 42, 0.045);
 }
 
-.bottom-nav .active {
+.sauce-card span,
+.sauce-card small {
+  display: block;
+}
+
+.sauce-card span {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.sauce-card small {
+  margin-top: 6px;
   color: var(--hot);
+  font-size: 12px;
+  font-weight: 700;
 }
 
 dialog {
@@ -436,7 +493,7 @@ dialog::backdrop {
 .modal-card,
 .checkout-card {
   overflow: hidden;
-  border-radius: 22px 22px 0 0;
+  border-radius: 28px 28px 0 0;
   background: var(--paper);
   box-shadow: var(--shadow);
 }
@@ -449,7 +506,7 @@ dialog::backdrop {
 .modal-card > img {
   display: block;
   width: 100%;
-  height: 190px;
+  height: 230px;
   object-fit: cover;
 }
 
@@ -469,7 +526,7 @@ dialog::backdrop {
 .checkout-card h2 {
   margin: 3px 0 8px;
   font-size: 24px;
-  font-weight: 900;
+  font-weight: 600;
 }
 
 .modal-body p {
@@ -493,7 +550,7 @@ dialog::backdrop {
 }
 
 .option-title span {
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .option-title small {
@@ -512,11 +569,11 @@ dialog::backdrop {
 .sauce-list button {
   min-height: 42px;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: 14px;
   background: var(--card);
   color: var(--ink);
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 700;
 }
 
 .option-grid .active,
@@ -559,7 +616,7 @@ dialog::backdrop {
   min-height: 54px;
   margin: 0 16px 16px;
   border: 0;
-  border-radius: 8px;
+  border-radius: 18px;
   background: var(--hot);
   color: #fff;
   font-weight: 900;
@@ -635,6 +692,10 @@ dialog::backdrop {
 @media (max-width: 360px) {
   .product-card {
     flex-basis: 136px;
+  }
+
+  .feature-card {
+    flex-basis: 274px;
   }
 
   .hero-copy h1 {
