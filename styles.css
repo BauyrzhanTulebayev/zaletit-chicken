@@ -43,6 +43,21 @@ button {
   padding: 0 0 34px;
 }
 
+.app-shell::before {
+  position: absolute;
+  top: 300px;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  height: 380px;
+  content: "";
+  background:
+    radial-gradient(ellipse at 50% 32%, rgba(243, 247, 245, 0.1) 0%, rgba(243, 247, 245, 0.4) 44%, rgba(243, 247, 245, 0.78) 72%, var(--paper) 100%),
+    linear-gradient(180deg, rgba(243, 247, 245, 0) 0%, rgba(243, 247, 245, 0.08) 18%, rgba(243, 247, 245, 0.35) 42%, rgba(243, 247, 245, 0.74) 66%, var(--paper) 100%);
+  filter: blur(18px);
+  pointer-events: none;
+}
+
 .topbar,
 .checkout-head,
 .summary-row,
@@ -323,22 +338,22 @@ button {
   content: "";
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.04) 24%, rgba(0, 0, 0, 0) 54%),
-    linear-gradient(180deg, rgba(243, 247, 245, 0) 0%, rgba(243, 247, 245, 0.03) 50%, rgba(243, 247, 245, 0.22) 76%, rgba(243, 247, 245, 0.58) 91%, rgba(243, 247, 245, 0.9) 100%);
+    linear-gradient(180deg, rgba(243, 247, 245, 0) 0%, rgba(243, 247, 245, 0.02) 48%, rgba(243, 247, 245, 0.14) 72%, rgba(243, 247, 245, 0.38) 88%, rgba(243, 247, 245, 0.72) 100%);
   pointer-events: none;
 }
 
 .hero::before {
   position: absolute;
   right: 0;
-  bottom: -230px;
+  bottom: -190px;
   left: 0;
   z-index: 2;
-  height: 420px;
+  height: 330px;
   content: "";
   background:
-    radial-gradient(ellipse at 50% 6%, rgba(243, 247, 245, 0.2) 0%, rgba(243, 247, 245, 0.36) 24%, rgba(243, 247, 245, 0.64) 50%, rgba(243, 247, 245, 0.9) 76%, var(--paper) 100%),
-    linear-gradient(180deg, rgba(243, 247, 245, 0) 0%, rgba(243, 247, 245, 0.22) 22%, rgba(243, 247, 245, 0.72) 58%, var(--paper) 92%);
-  filter: blur(10px);
+    radial-gradient(ellipse at 50% 10%, rgba(243, 247, 245, 0.14) 0%, rgba(243, 247, 245, 0.3) 34%, rgba(243, 247, 245, 0.62) 68%, var(--paper) 100%),
+    linear-gradient(180deg, rgba(243, 247, 245, 0) 0%, rgba(243, 247, 245, 0.16) 28%, rgba(243, 247, 245, 0.56) 68%, var(--paper) 100%);
+  filter: blur(18px);
   pointer-events: none;
 }
 
@@ -392,8 +407,8 @@ button {
   margin: -126px 0 0;
   overflow-x: auto;
   padding: 56px 24px 16px;
-  background: linear-gradient(180deg, rgba(243, 247, 245, 0), rgba(243, 247, 245, 0.24) 30%, rgba(243, 247, 245, 0.64) 72%, rgba(243, 247, 245, 0.88) 100%);
-  backdrop-filter: blur(14px);
+  background: transparent;
+  backdrop-filter: none;
   scrollbar-width: none;
 }
 
@@ -426,7 +441,7 @@ button {
   position: relative;
   z-index: 8;
   min-height: 342px;
-  background: linear-gradient(180deg, rgba(243, 247, 245, 0.86) 0, rgba(243, 247, 245, 0.96) 74px, var(--paper) 150px);
+  background: transparent;
 }
 
 .menu-list.is-swapping {
