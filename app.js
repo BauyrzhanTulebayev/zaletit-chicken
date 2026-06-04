@@ -19,13 +19,13 @@ const heroScenes = {
   "for-you": {
     title: "Крылья, которые залетают",
     subtitle: "Хруст, соус и жар прямо в твоём боксе",
-    video: "/assets/category-hero/hero-for-you.mp4",
+    video: "/assets/category-hero/kling-test-hero.mp4",
     poster: "/assets/category-hero/wings.png",
   },
   wings: {
     title: "Выбирай остроту",
     subtitle: "Classic, boneless или tenders с соусом на максимум",
-    video: "/assets/category-hero/hero-wings.mp4",
+    video: "/assets/category-hero/kling-test-hero.mp4",
     poster: "/assets/category-hero/wings.png",
   },
   combo: {
@@ -325,6 +325,7 @@ function renderTabs() {
 
 function renderMenu() {
   const html = state.activeTab === "for-you" ? renderForYou() : renderCategory(state.activeTab);
+  menuList.classList.toggle("category-mode", state.activeTab !== "for-you");
   menuList.classList.remove("is-swapping");
   void menuList.offsetWidth;
   menuList.classList.add("is-swapping");
@@ -365,10 +366,10 @@ function renderCategory(categoryId) {
   const category = categories.find((item) => item.id === categoryId);
   if (!category) return renderForYou();
   return `
-    <section class="menu-section menu-panel" data-panel="${category.id}">
+    <section class="menu-section menu-panel category-page" data-panel="${category.id}">
       <h2 class="section-title">${category.title.toLowerCase()}</h2>
-      <div class="product-row compact-row">
-        ${category.items.map((item) => renderProductCard(item, "compact")).join("")}
+      <div class="category-grid">
+        ${category.items.map((item) => renderProductCard(item, "catalog")).join("")}
       </div>
     </section>
   `;
@@ -376,8 +377,9 @@ function renderCategory(categoryId) {
 
 function renderProductCard(item, variant) {
   const isFeature = variant === "feature";
+  const isCatalog = variant === "catalog";
   return `
-    <article class="product-card ${isFeature ? "feature-card" : "compact-card"}" data-card-product="${item.id}">
+    <article class="product-card ${isFeature ? "feature-card" : "compact-card"} ${isCatalog ? "catalog-card" : ""}" data-card-product="${item.id}">
       <div class="product-visual">
         <img src="${item.image}" alt="${item.name}" loading="lazy" />
         ${isFeature ? `<button class="add-button" data-product="${item.id}" type="button" aria-label="Добавить ${item.name}"><i data-lucide="plus"></i></button>` : ""}

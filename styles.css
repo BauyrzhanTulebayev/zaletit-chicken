@@ -136,8 +136,8 @@ button {
 
 .hero {
   position: relative;
-  min-height: 560px;
-  overflow: hidden;
+  min-height: 590px;
+  overflow: visible;
   border-radius: 0;
   background: #17120f;
 }
@@ -327,12 +327,27 @@ button {
   pointer-events: none;
 }
 
+.hero::before {
+  position: absolute;
+  right: 0;
+  bottom: -150px;
+  left: 0;
+  z-index: 2;
+  height: 250px;
+  content: "";
+  background:
+    radial-gradient(ellipse at 50% 8%, rgba(243, 247, 245, 0.18) 0%, rgba(243, 247, 245, 0.42) 38%, rgba(243, 247, 245, 0.82) 72%, var(--paper) 100%),
+    linear-gradient(180deg, rgba(243, 247, 245, 0), var(--paper) 86%);
+  filter: blur(0.2px);
+  pointer-events: none;
+}
+
 .hero-copy {
   position: absolute;
   right: 24px;
   bottom: 118px;
   left: 24px;
-  z-index: 2;
+  z-index: 3;
   color: var(--ink);
   text-align: center;
 }
@@ -374,11 +389,11 @@ button {
   z-index: 9;
   display: flex;
   gap: 24px;
-  margin: -88px 0 0;
+  margin: -118px 0 0;
   overflow-x: auto;
-  padding: 26px 24px 12px;
-  background: linear-gradient(180deg, rgba(243, 247, 245, 0.66), var(--paper) 62%);
-  backdrop-filter: blur(18px);
+  padding: 48px 24px 14px;
+  background: linear-gradient(180deg, rgba(243, 247, 245, 0), rgba(243, 247, 245, 0.72) 54%, var(--paper) 100%);
+  backdrop-filter: blur(10px);
   scrollbar-width: none;
 }
 
@@ -408,7 +423,10 @@ button {
 }
 
 .menu-list {
+  position: relative;
+  z-index: 8;
   min-height: 342px;
+  background: linear-gradient(180deg, rgba(243, 247, 245, 0.72), var(--paper) 80px);
 }
 
 .menu-list.is-swapping {
@@ -435,6 +453,17 @@ button {
   display: none;
 }
 
+.category-page {
+  padding-right: 0;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 0 24px 8px 0;
+}
+
 .product-card {
   display: flex;
   flex: 0 0 142px;
@@ -454,6 +483,14 @@ button {
   flex-basis: 292px;
   min-height: 392px;
   border-radius: 28px;
+}
+
+.catalog-card {
+  flex: initial;
+  min-width: 0;
+  min-height: 246px;
+  border-radius: 18px;
+  scroll-snap-align: none;
 }
 
 .product-info {
@@ -539,6 +576,11 @@ button {
 .feature-card .product-visual {
   height: 252px;
   border-radius: 28px 28px 0 0;
+}
+
+.catalog-card .product-visual {
+  height: 136px;
+  border-radius: 18px 18px 0 0;
 }
 
 .product-visual img {
